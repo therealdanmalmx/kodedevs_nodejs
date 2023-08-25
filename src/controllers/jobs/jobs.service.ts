@@ -42,24 +42,10 @@ export const createJob = async (job: Jobs): Promise<Jobs> => {
             company_tagline,
             company_logo,
         },
-        select: {
-            id: true,
-            title: true,
-            description: true,
-            qualification: true,
-            responsibilities: true,
-            location: true,
-            company_name: true,
-            company_website: true,
-            company_tagline: true,
-            company_logo: true,
-            cretedAt: true,
-        }
     });
 };
 
 // UPDATE JOB
-
 export const updateJob = async (id: string, job: Jobs): Promise<Jobs | null> => {
     const { title, description, qualification, responsibilities, location, company_name, company_website, company_tagline, company_logo } = job;
     return db.jobs.update({
@@ -77,19 +63,6 @@ export const updateJob = async (id: string, job: Jobs): Promise<Jobs | null> => 
             company_tagline,
             company_logo,
         },
-        select: {
-            id: true,
-            title: true,
-            description: true,
-            qualification: true,
-            responsibilities: true,
-            location: true,
-            company_name: true,
-            company_website: true,
-            company_tagline: true,
-            company_logo: true,
-            cretedAt: true,
-        }
     });
 };
 
