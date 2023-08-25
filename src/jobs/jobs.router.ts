@@ -7,9 +7,10 @@ import * as JobsService from './jobs.service';
 export const jobsRouter = express.Router();
 
 // GET all jobs
-jobsRouter.get('/jobs', async (req: Request, res: Response) => {
+jobsRouter.get('/', async (req: Request, res: Response) => {
     try {
-        const jobs = await JobsService.listJobs();
+        const jobs = await JobsService.listAllJobs();
+
         res.status(200).json(jobs);
     } catch (error: any) {
         res.status(500).json(error.message);
@@ -21,7 +22,7 @@ jobsRouter.get('/:id', async (req: Request, res: Response) => {
     const id: string = req.params.id;
 
     try {
-        const jobs = await JobsService.listJob(id);
+        const jobs = await JobsService.listSingleJob(id);
 
         if (jobs) {
             return res.status(200).json(jobs);
@@ -44,7 +45,7 @@ jobsRouter.post(
     body('company_name').isString(),
     body('company_website').isString(),
     body('company_tagline').isString(),
-    body('company_logo').isURL({protocols: ['https']}),
+    body('company_logo').isURL({protocols: ['http', 'https']}),
     async (req: Request, res: Response) => {
         const errors = validationResult(req);
 
@@ -77,7 +78,7 @@ jobsRouter.put(
     body('company_name').isString(),
     body('company_website').isString(),
     body('company_tagline').isString(),
-    body('company_logo').isURL({protocols: ['https']}),
+    body('company_logo').isURL({protocols: ['http', 'https']}),
     async (req: Request, res: Response) => {
         const errors = validationResult(req);
 
@@ -86,7 +87,9 @@ jobsRouter.put(
                 .status(400)
                 .json({ errors: errors.array() });
         }
+
         const id: string = req.params.id;
+
         try {
             const job = req.body;
             const updatedJob = await JobsService.updateJob(id, job);

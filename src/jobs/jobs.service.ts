@@ -1,5 +1,5 @@
-import { db } from '../../utils/db.server';
-
+import { db } from '../utils/db.server';
+// import { Jobs } from '../types.ts';
 
 type Jobs = {
     title: string;
@@ -14,12 +14,12 @@ type Jobs = {
 };
 
 // GET ALL JOBS
-export const listJobs = async (): Promise<Jobs[]> => {
+export const listAllJobs = async (): Promise<Jobs[]> => {
     return db.jobs.findMany();
 };
 
 // GET SINGLE JOB
-export const listJob = async (id: string): Promise<Jobs | null> => {
+export const listSingleJob = async (id: string): Promise<Jobs | null> => {
     return db.jobs.findUnique({
         where: {
             id,
