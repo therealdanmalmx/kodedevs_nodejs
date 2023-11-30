@@ -1,4 +1,4 @@
-import { db } from '../src/utils/db.server';
+import { db } from '../db/db.server';
 
 type Jobs = {
     title: string;

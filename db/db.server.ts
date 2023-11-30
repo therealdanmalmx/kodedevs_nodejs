@@ -1,7 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 
-
-let db: PrismaClient;
+let prisma: PrismaClient;
 
 declare global {
     var _db: PrismaClient | undefined;
@@ -11,7 +10,7 @@ if (!global._db) {
     global._db = new PrismaClient();
  }
 
-db = global._db;
+prisma = global._db;
 
 
-export { db };
+export default prisma ;
