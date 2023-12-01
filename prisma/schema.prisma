@@ -11,16 +11,22 @@ datasource db {
 }
 
 model Jobs {
-  id                  String     @id @default(uuid())
-  title               String
-  description         String
-  qualification       String
-  responsibilities    String
-  location            String
-  company_website     String
-  company_name        String
-  company_tagline     String
-  company_logo        String
-  cretedAt            DateTime   @default(now())
-  updatedAt           DateTime   @updatedAt
+  id               String   @id @default(uuid())
+  title            String   @db.VarChar(255)
+  description      String   @db.VarChar(65353)
+  qualification    String   @db.VarChar(65353)
+  responsibilities String   @db.VarChar(65353)
+  location         String   @db.VarChar(255)
+  company_website  String   @db.VarChar(255)
+  company_name     String   @db.VarChar(255)
+  company_tagline  String   @db.VarChar(1024)
+  company_logo     String   @db.VarChar(255)
+  role             Role     @default(USER)
+  cretedAt         DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+enum Role {
+  ADMIN
+  USER
 }
