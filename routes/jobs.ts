@@ -1,4 +1,6 @@
 import express from 'express';
+import { validateJobs } from '../validations/validation-functions';
+
 const router = express.Router();
 
 import {
@@ -11,11 +13,11 @@ import {
 
 router
     .get('/', getAllJobs)
-    .post('/', createJob);
+    .post('/', validateJobs, createJob);
 
     router
     .get('/:id', getSingleJob)
-    .patch('/:id', updateJob)
+    .patch('/:id', validateJobs, updateJob)
     .delete('/:id', deleteJob);
 
 export { router as jobsRouter};

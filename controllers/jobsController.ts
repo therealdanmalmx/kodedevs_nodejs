@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express';
-import { body, validationResult } from 'express-validator';
+import { validationResult } from 'express-validator';
 import prisma from '../db/db.server';
 
 const getAllJobs = async (req: Request, res: Response) => {
@@ -35,27 +35,27 @@ const getSingleJob = async (req: Request, res: Response) => {
 };
 
 const createJob = async (req: Request, res: Response) => {
-
-    // body('title').isString();
-    // body('description').isString();
-    // body('qualification').isString();
-    // body('responsibilities').isString();
-    // body('location').isString();
-    // body('company_name').isString();
-    // body('company_website').isString();
-    // body('company_tagline').isString();
-    // body('company_logo').isURL({protocols: ['http', 'https']});
-
-    // const errors = validationResult(req);
-
-    //     if (!errors.isEmpty()) {
-    //         return res
-    //             .status(400)
-    //             .json({ errors: errors.array() });
-    //     }
-        try {
-            const job = req.body;
-            const newJob = await prisma.jobs.create(job);
+    const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res
+                .status(400)
+                .json({ errors: errors.array() });
+            }
+            try {
+            const {title, description, qualification, responsibilities, location, company_name, company_website, company_tagline, company_logo} = req.body;
+            const newJob = await prisma.jobs.create({
+                data: {
+                    title,
+                    description,
+                    qualification,
+                    responsibilities,
+                    location,
+                    company_name,
+                    company_website,
+                    company_tagline,
+                    company_logo,
+                },
+            });
             return res
                 .status(201)
                 .json(newJob);
@@ -70,21 +70,11 @@ const updateJob = async (req: Request, res: Response) => {
     const errors = validationResult(req);
     const id: string = req.params.id;
 
-    // body('title').isString();
-    // body('description').isString();
-    // body('qualification').isString();
-    // body('responsibilities').isString();
-    // body('location').isString();
-    // body('company_name').isString();
-    // body('company_website').isString();
-    // body('company_tagline').isString();
-    // body('company_logo').isURL({protocols: ['http', 'https']});
-
-        // if (!errors.isEmpty()) {
-        //     return res
-        //         .status(400)
-        //         .json({ errors: errors.array() });
-        // }
+    if (!errors.isEmpty()) {
+        return res
+            .status(400)
+            .json({ errors: errors.array() });
+        }
 
         try {
             const job = await prisma.jobs.findUnique({
