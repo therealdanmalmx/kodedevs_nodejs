@@ -9,9 +9,9 @@ if (!process.env.PORT) {
     process.exit(1);
 }
 
-const PORT: number = parseInt(process.env.PORT as string, 10) || 8000;
 
 const app = express();
+const PORT: number = parseInt(process.env.PORT as string, 10) || 8000;
 
 app.use(cors());
 app.use(express.json());

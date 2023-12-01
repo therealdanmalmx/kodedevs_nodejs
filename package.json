@@ -2,12 +2,9 @@
   "name": "kodedevs_nodejs",
   "version": "1.0.0",
   "description": "",
-  "main": "app.ts",
-  "prisma": {
-    "seed": "node --require esbuild-register prisma/seed.ts"
-  },
+  "main": "index.ts",
   "scripts": {
-    "dev": "nodemon app.ts",
+    "dev": "nodemon index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
