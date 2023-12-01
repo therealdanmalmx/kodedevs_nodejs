@@ -1,14 +1,13 @@
 import * as dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
-import { jobsRouter } from './routes/jobs';
+import { jobsRouter } from './src/routes/jobs';
 
 dotenv.config();
 
 if (!process.env.PORT) {
     process.exit(1);
 }
-
 
 const app = express();
 const PORT: number = parseInt(process.env.PORT as string, 10) || 8000;

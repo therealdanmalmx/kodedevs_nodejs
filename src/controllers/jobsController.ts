@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express';
-import { showValidationErrors } from '../validations/validation-utilities';
+import { showValidationErrors } from '../utilities/validations/validation-utilities';
 import prisma from '../db/db.server';
 
 const getAllJobs = async (req: Request, res: Response) => {
