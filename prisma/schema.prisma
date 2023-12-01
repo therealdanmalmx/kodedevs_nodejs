@@ -13,9 +13,9 @@ datasource db {
 model Jobs {
   id               String   @id @default(uuid())
   title            String   @db.VarChar(255)
-  description      String   @db.VarChar(65353)
-  qualification    String   @db.VarChar(65353)
-  responsibilities String   @db.VarChar(65353)
+  description      String   @db.VarChar(10200)
+  qualification    String   @db.VarChar(10200)
+  responsibilities String   @db.VarChar(10200)
   location         String   @db.VarChar(255)
   company_website  String   @db.VarChar(255)
   company_name     String   @db.VarChar(255)
