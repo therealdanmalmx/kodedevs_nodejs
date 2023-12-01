@@ -1,23 +1,24 @@
-import express from 'express';
+import { Router } from "express";
 import { validateJobs } from '../utilities/validations/validation-utilities';
 
-const router = express.Router();
+const jobsRouter: Router = Router();
 
 import {
+    createJob,
+    deleteJob,
     getAllJobs,
     getSingleJob,
-    createJob,
-    updateJob,
-    deleteJob
+    updateJob
 } from '../controllers/jobsController';
 
-router
+jobsRouter
     .get('/', getAllJobs)
     .post('/', validateJobs, createJob);
 
-    router
+    jobsRouter
     .get('/:id', getSingleJob)
     .patch('/:id', validateJobs, updateJob)
     .delete('/:id', deleteJob);
 
-export { router as jobsRouter};
+export { jobsRouter };
+
