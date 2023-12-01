@@ -1,5 +1,5 @@
 import express from 'express';
-import { validateJobs } from '../validations/validation-functions';
+import { validateJobs } from '../validations/validation-utilities';
 
 const router = express.Router();
 
