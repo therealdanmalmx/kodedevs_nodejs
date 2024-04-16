@@ -23,7 +23,6 @@ model Jobs {
   company_logo     String   @db.VarChar(255)
   role             Role     @default(USER)
   cretedAt         DateTime @default(now())
-  updatedAt        DateTime @updatedAt
 }
 
 enum Role {

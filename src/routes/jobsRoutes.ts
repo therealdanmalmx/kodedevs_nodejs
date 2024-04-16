@@ -12,7 +12,7 @@ import {
 } from '../controllers/jobsController';
 
 jobsRouter
-    .get('/', getAllJobs)
+    .get('/', (getAllJobs))
     .post('/', validateJobs, createJob);
 
     jobsRouter
