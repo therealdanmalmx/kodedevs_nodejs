@@ -6,6 +6,7 @@ const getAllJobs = async (req: Request, res: Response) => {
     try {
         const jobs = await prisma.jobs.findMany();
 
+
         return res.status(200).json(jobs);
 
     } catch (error: any) {
@@ -24,7 +25,7 @@ const getSingleJob = async (req: Request, res: Response) => {
             });
 
             if (!jobs) {
-                return res.status(404).json("Job could not be found");
+                return res.status(404).json(`Job with id: ${id} could not be found`);
             }
 
             return res.status(200).json(jobs);

@@ -13,7 +13,13 @@ if (!process.env.PORT) {
 const app: Express = express();
 const PORT: number = parseInt(process.env.PORT as string, 10);
 
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST', 'PATCH', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+  }));
+
 app.use(express.json());
 
 app.use('/api/jobs', jobsRouter );
