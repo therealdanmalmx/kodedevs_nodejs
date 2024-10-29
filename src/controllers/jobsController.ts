@@ -13,6 +13,7 @@ const getAllJobs = async (
     if (!jobList.length) {
       res.status(404).json({ message: "No jobs found" });
     }
+    console.log(`just for test`);
     res.status(200).json(jobList);
   } catch (error: any) {
     next(error);
