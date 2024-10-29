@@ -15,6 +15,7 @@ CREATE TABLE "Jobs" (
     "company_logo" VARCHAR(255) NOT NULL,
     "role" "Role" NOT NULL DEFAULT 'USER',
     "cretedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Jobs_pkey" PRIMARY KEY ("id")
 );
