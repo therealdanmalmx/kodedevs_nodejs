@@ -10,7 +10,7 @@ const getAllJobs = async (
   try {
     const jobList = await prisma.jobs.findMany();
 
-    if (!jobList) {
+    if (!jobList.length) {
       res.status(404).json({ message: "No jobs found" });
     }
 

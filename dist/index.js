@@ -54258,8 +54258,11 @@ var db_server_default = prisma;
 // src/controllers/jobsController.ts
 var getAllJobs = async (req, res, next) => {
   try {
-    const jobs = await db_server_default.jobs.findMany();
-    res.status(200).json(jobs);
+    const jobList = await db_server_default.jobs.findMany();
+    if (!jobList.length) {
+      res.status(404).json({ message: "No jobs found" });
+    }
+    res.status(200).json(jobList);
   } catch (error) {
     next(error);
   }
@@ -54267,15 +54270,15 @@ var getAllJobs = async (req, res, next) => {
 var getSingleJob = async (req, res, next) => {
   const id2 = req.params.id;
   try {
-    const jobs = await db_server_default.jobs.findUnique({
+    const singleJob = await db_server_default.jobs.findUnique({
       where: {
         id: id2
       }
     });
-    if (!jobs) {
+    if (!singleJob) {
       res.status(404).json(`Job with id: ${id2} could not be found`);
     }
-    res.status(200).json(jobs);
+    res.status(200).json(singleJob);
   } catch (error) {
     next(error);
   }
@@ -54381,6 +54384,7 @@ var deleteJob = async (req, res, next) => {
 var jobsRouter = (0, import_express.Router)();
 jobsRouter.get("/", getAllJobs).post("/", validateJobs, createJob);
 jobsRouter.get("/:id", getSingleJob).patch("/:id", validateJobs, updateJob).delete("/:id", deleteJob);
+var jobsRoutes_default = jobsRouter;
 
 // src/routes/authRoutes.ts
 var import_express2 = __toESM(require_express2());
@@ -54416,8 +54420,8 @@ app.use(
 app.use(import_express3.default.json());
 app.use((0, import_morgan.default)("dev"));
 app.use((0, import_errorhandler.default)());
-app.use("/api", jobsRouter);
-appRouter.use("/jobs", jobsRouter);
+app.use("/api", appRouter);
+appRouter.use("/jobs", jobsRoutes_default);
 appRouter.use("/auth", authRouter);
 app.listen(PORT, () => {
   console.log(`Listening on port http://localhost:${PORT}`);
