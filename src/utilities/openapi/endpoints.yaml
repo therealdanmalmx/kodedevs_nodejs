@@ -1,0 +1,140 @@
+openapi: 3.0.0
+components:
+  schemas:
+    Jobs:
+      type: object
+      required:
+        - title
+        - description
+        - qualification
+        - responsibilities
+        - location
+        - company_website
+        - company_name
+        - company_tagline
+        - company_logo
+      properties:
+        title:
+          type: string
+          description: Title of the job
+        description:
+          type: string
+          description: The description of the job
+        qualification:
+          type: string
+          description: Qualifications needed for the job
+        responsibilities:
+          type: string
+          description: The responsabilities of the job
+        location:
+          type: string
+          description: The location of the job
+        company_website:
+          type: string
+          description: Link to the company website
+        company_tagline:
+          type: string
+          description: The company tagline
+        company_logo:
+          type: string
+          description: The company logo
+      example:
+        title: Frontend role with backend experience
+        description: In this role, you will be responsible for developing and maintaining the frontend of our application. You will also be required to have some backend experience.
+        qualification: 3 years of experience in frontend development
+        responsibilities: Develop and maintain the frontend of our application
+        location: Gothenburg, Sweden
+        company_website: https://www.company.com
+        company_name: Company
+        company_tagline: We are a company
+        company_logo: https://www.company.com/logo.png
+
+# JOBS ENDPOINTS
+paths:
+  /api/v1/jobs:
+    get:
+      tags:
+        - Get Jobs
+      summary: Retrieve a list of jobs
+      responses:
+        200:
+          description: A list of jobs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Jobs"
+    post:
+      tags:
+        - Create Job
+      summary: Create a new job
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Jobs"
+      responses:
+        201:
+          description: The created job
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Jobs"
+
+  /api/v1/jobs/{id}:
+    get:
+      tags:
+        - Get Job by ID
+      summary: Retrieve a single job by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: A single job
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Jobs"
+    patch:
+      tags:
+        - Update Job
+      summary: Update a job by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Jobs"
+      responses:
+        200:
+          description: The updated job
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Jobs"
+
+    delete:
+      tags:
+        - Delete Job
+      summary: Delete a job by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        204:
+          description: Job deleted successfully
